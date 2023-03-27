@@ -1,0 +1,23 @@
+import { TextCard } from 'components/TextCard/TextCard'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import style from './style.module.css'
+
+export function NoteList(props){
+    const noteList = useSelector(store => store.NOTE.noteList)
+    const navigate = useNavigate();
+    
+    return (
+       <div className={`row justify-content-center`}>
+        {
+            noteList.map((note) => {
+                return (
+                    <div key={note.id} className={style.card_container}>
+                        <TextCard title={note.title} subtitle={note.subtitle} content={note.content} onClick={() => navigate("/note/"+note.id)} onCLickTrash={() => {alert("click trash")}}/>
+                    </div>
+                )
+            })
+        }
+        </div> 
+    )
+}
